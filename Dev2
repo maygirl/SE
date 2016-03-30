@@ -1,0 +1,52 @@
+# SE
+package dev 2;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ *
+ * @author 
+ */
+public class Buffer {
+    
+     private String cuv ;
+     private boolean available = false ;
+
+     public synchronized String get () {
+       while (! available ) {
+         try {
+          wait ();
+            // Asteapta producatorul sa puna o valoare
+             } catch ( InterruptedException e) {
+                  e. printStackTrace ();
+              }
+             }
+                 available = false ;
+                  notifyAll ();
+                    return cuv ;
+      }
+
+     public synchronized void put (String expr ) {
+         while ( available ) {
+             try {
+               wait();
+                  // Asteapta consumatorul sa preia valoarea
+                 }catch ( InterruptedException e) {
+                      e. printStackTrace ();
+                   }
+             }
+                this . cuv = expr ;
+                available = true ;
+                 notifyAll ();
+         
+           }
+}
