@@ -202,3 +202,8 @@ public class Producer extends Thread {
         Mme. Maria Popovici
         M. George Tanase
         Mme. Gratiela Mirela
+        
+        
+        
+        
+        //Pentru ca fisierele .txt nu imi puteau fi uploadate, am pus aici toate liniile de cod , din fiecare fisier.La final gasiti si lista cu persoanele din fisierul cu nume.
