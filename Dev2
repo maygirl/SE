@@ -48,3 +48,157 @@ public class Buffer {
          
            }
 }
+
+
+
+
+
+
+
+
+package tema2;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+
+/**
+ *
+ * @author
+ */
+public class Consumer extends Thread {
+    
+      private Buffer buffer ;
+        
+      public Consumer ( Buffer b) {
+          this.buffer = b;
+        }
+ 
+    @Override
+    public void run () {
+            
+      try{
+        File f=new File("D:\\My Documents\\FAC\\SE\\Devoir2\\Tema2\\ListePersonnes.txt");
+        File f2= new File("D:\\My Documents\\FAC\\SE\\Devoir2\\Tema2\\Bonjour.txt");
+        FileInputStream f1= new FileInputStream(f);
+        FileOutputStream f3= new FileOutputStream(f2);
+        PrintWriter pw=new PrintWriter(f3,true);
+        BufferedReader b1=new BufferedReader(new InputStreamReader(f1));
+        String a=buffer.get() ;
+        
+         if(a!=null){ 
+            pw.println(a);
+            
+            }
+        
+        
+        b1.close();
+        f1.close();
+        
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+            
+             
+           }
+}
+
+
+
+
+
+
+
+
+
+
+
+package tema2;
+
+
+public class Tema2 {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+       
+        Buffer b= new Buffer();
+        Consumer c1= new Consumer(b);
+        Producer p1= new Producer(b);
+       
+        p1.start();
+        c1.start();
+        
+      
+    }
+}
+
+
+
+
+package tema2;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+
+/**
+ *
+ * @author 
+ */
+public class Producer extends Thread {
+    
+     private Buffer buffer ;
+        
+      public Producer ( Buffer b) {
+          this.buffer = b;
+        }
+     
+    @Override
+    public void run () {
+            
+      try{
+        File f=new File("D:\\My Documents\\FAC\\SE\\Devoir2\\Tema2\\ListePersonnes.txt");
+        File f2= new File("D:\\My Documents\\FAC\\SE\\Devoir2\\Tema2\\Bonjour.txt");
+        FileInputStream f1= new FileInputStream(f);
+        FileOutputStream f3= new FileOutputStream(f2);
+       
+        BufferedReader b1=new BufferedReader(new InputStreamReader(f1));
+        String a=" " ;
+        while(a!=null){
+           
+            a=b1.readLine();
+            if(a!=null){ 
+                buffer.put(a);
+                
+            }
+        }
+        
+        b1.close();
+        f1.close();
+        
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+            
+            
+
+        //Lista Persoane
+        
+        M. Marin Daniel
+        Mme. Madalina Bratu
+        M. Constantin Ciprian
+        Mme. Ana Ovejan
+        M. Cristian Andrei
+        Mme. Amelie Andree
+        M. Pierre Alexandrovici
+        Mme. Maria Popovici
+        M. George Tanase
+        Mme. Gratiela Mirela
