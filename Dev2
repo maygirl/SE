@@ -25,7 +25,6 @@ public class Buffer {
        while (! available ) {
          try {
           wait ();
-            // Asteapta producatorul sa puna o valoare
              } catch ( InterruptedException e) {
                   e. printStackTrace ();
               }
@@ -39,7 +38,6 @@ public class Buffer {
          while ( available ) {
              try {
                wait();
-                  // Asteapta consumatorul sa preia valoarea
                  }catch ( InterruptedException e) {
                       e. printStackTrace ();
                    }
