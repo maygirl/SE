@@ -102,3 +102,19 @@ public class ProducerConsumerPattern {
 			}
     }
     
+    public static void closeBufferOutput(){
+	     try {
+	    	 System.out.println("!!!!!!");
+	       if (bufferedOutput != null) {
+	           bufferedOutput.flush();
+	           bufferedOutput.close();
+	       }
+		   } catch (IOException ex) {
+		
+                       
+                       ex.printStackTrace();
+		   }
+    }
+
+ 
+}
